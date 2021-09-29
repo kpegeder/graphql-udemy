@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { Link, useHistory } from 'react-router-dom';
-import gql from 'graphql-tag';
-import { FETCH_SONGS } from '../queries/fetchSongs';
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { Link, useHistory } from "react-router-dom";
+import gql from "graphql-tag";
+import { FETCH_SONGS } from "../queries/fetchSongs";
 
 const SongCreate = () => {
   const [addSong, { data }] = useMutation(ADD_SONG);
   const history = useHistory();
-  const [songTitle, setSongTitle] = useState('');
+  const [songTitle, setSongTitle] = useState("");
 
   const submitNewSong = (e) => {
     e.preventDefault();
@@ -16,8 +16,8 @@ const SongCreate = () => {
       refetchQueries: [{ query: FETCH_SONGS }],
     })
       .then(() => {
-        setSongTitle('');
-        history.push('/');
+        setSongTitle("");
+        history.push("/");
       })
       .catch((error) => {
         console.log({ error });
@@ -25,17 +25,18 @@ const SongCreate = () => {
   };
 
   return (
-    <div className='container'>
-      <Link to='/'>Back</Link>
+    <div className="container">
+      <Link to="/">Back</Link>
       <h3>Create a New Song</h3>
-      <form className='form' onSubmit={submitNewSong}>
+      <form className="form" onSubmit={submitNewSong}>
         <label>Song Title:</label>
         <input
-          className='input'
-          type='text'
+          className="input"
+          type="text"
           value={songTitle}
           onChange={(e) => setSongTitle(e.target.value)}
         />
+        <button>Submit</button>
       </form>
     </div>
   );

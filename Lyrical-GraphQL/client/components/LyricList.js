@@ -1,7 +1,7 @@
-import React from 'react';
-import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
-//import { TiThumbsUp } from 'react-icons/ti';
+import React from "react";
+import gql from "graphql-tag";
+import { useMutation } from "@apollo/client";
+import { TiThumbsUp } from "react-icons/ti";
 
 // import styles from './LyricList.module.css';
 
@@ -12,10 +12,10 @@ const LyricList = ({ lyrics }) => {
     likeLyric({
       variables: { id },
       optimisticResponse: {
-        __typename: 'Mutation',
+        __typename: "Mutation",
         likeLyric: {
           id,
-          __typename: 'LyricType',
+          __typename: "LyricType",
           likes: likes + 1,
         },
       },

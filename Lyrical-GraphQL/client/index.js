@@ -1,21 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { StaticRouter } from 'react-router';
+import React from "react";
+import ReactDOM from "react-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  HashRouter,
+} from "react-router-dom";
+import { StaticRouter } from "react-router";
 import {
   ApolloClient,
   ApolloProvider,
   InMemoryCache,
   HttpLink,
-} from '@apollo/client';
+} from "@apollo/client";
 
-import SongList from './components/songList/SongList';
-import SongCreate from './components/SongCreate';
-import SongDetails from './components/SongDetails';
-import './style/style.css';
+import SongList from "./components/songList/SongList";
+import SongCreate from "./components/SongCreate";
+import SongDetails from "./components/SongDetails";
+import "./style/style.css";
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:4000/graphql',
+  uri: "http://localhost:4000/graphql",
 });
 
 const client = new ApolloClient({
@@ -28,15 +33,17 @@ const client = new ApolloClient({
 const Root = () => {
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <Route exact path='/' component={SongList} />
-        <Switch>
-          <Route exact path='/songs/new' component={SongCreate}></Route>
-          <Route exact path='/songs/:id' component={SongDetails} />
-        </Switch>
-      </Router>
+      <HashRouter>
+        <Router>
+          <Route exact path="/" component={SongList} />
+          <Switch>
+            <Route exact path="/songs/new" component={SongCreate}></Route>
+            <Route exact path="/songs/:id" component={SongDetails} />
+          </Switch>
+        </Router>
+      </HashRouter>
     </ApolloProvider>
   );
 };
 
-ReactDOM.render(<Root />, document.querySelector('#root'));
+ReactDOM.render(<Root />, document.querySelector("#root"));

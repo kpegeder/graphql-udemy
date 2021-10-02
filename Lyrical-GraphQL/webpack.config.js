@@ -13,7 +13,6 @@ module.exports = {
         test: /\.m?js$/,
         exclude: /node_modules/,
         use: [
-          "source-map-loader",
           {
             loader: "babel-loader",
             options: {

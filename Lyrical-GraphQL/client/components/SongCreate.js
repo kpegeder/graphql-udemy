@@ -25,7 +25,7 @@ const SongCreate = () => {
   };
 
   return (
-    <div className="container">
+    <div>
       <Link to="/">Back</Link>
       <h3>Create a New Song</h3>
       <form className="form" onSubmit={submitNewSong}>

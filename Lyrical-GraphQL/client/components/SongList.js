@@ -1,8 +1,8 @@
 import React from "react";
 import { gql, useQuery, useMutation } from "@apollo/client";
-import { FETCH_SONGS } from "../../queries/fetchSongs";
+import { FETCH_SONGS } from "../queries/fetchSongs";
 import { Link } from "react-router-dom";
-import "./SongList.module.css";
+import "../style/style.css";
 
 const SongList = () => {
   const { loading, error, data } = useQuery(FETCH_SONGS);
@@ -19,13 +19,11 @@ const SongList = () => {
   const renderSongs = () => {
     return data.songs.map(({ id, title }) => {
       return (
-        <li key={id} className="collectionItem">
-          <Link className="collectionItem__link" to={`/songs/${id}`}>
-            {title}
-          </Link>
-          <span onClick={() => onSongDelete(id)} className="deleteSpan">
-            X
-          </span>
+        <li key={id} className="collection-item">
+          <Link to={`/songs/${id}`}>{title}</Link>
+          <i className="material-icons" onClick={() => onDeletSong(id)}>
+            delete
+          </i>
         </li>
       );
     });
@@ -35,11 +33,11 @@ const SongList = () => {
   if (error) return <p>error</p>;
 
   return (
-    <div className="collection__container container">
+    <div>
       <h1>Song List</h1>
       <ul className="collection">{renderSongs()}</ul>
-      <Link to="/songs/new" className="collection__link">
-        Add Song
+      <Link to="/songs/create" className="btn-floating btn-large red right">
+        <i className="material-icons ">add</i>
       </Link>
     </div>
   );

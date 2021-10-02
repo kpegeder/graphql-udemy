@@ -1,15 +1,15 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const FETCH_SINGLE_SONG = gql`
   query FetchSingleSong($id: ID!) {
     song(id: $id) {
       id
       title
-      # lyrics {
-      #   id
-      #   content
-      #   likes
-      # }
+      lyrics {
+        id
+        content
+        likes
+      }
     }
   }
 `;
